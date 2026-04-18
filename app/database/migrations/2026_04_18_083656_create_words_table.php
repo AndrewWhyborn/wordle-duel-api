@@ -13,10 +13,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('words', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create(
+            App\Models\Word::TABLE_NAME,
+            function (Blueprint $table) {
+                $table->id();
+
+                $table
+                    ->string('url')
+                    ->comment('URL.')
+                ;
+
+                $table
+                    ->string('target')
+                    ->comment('Загаданное слово.')
+                ;
+
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -24,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('words');
+        Schema::dropIfExists(App\Models\Word::TABLE_NAME);
     }
 };
