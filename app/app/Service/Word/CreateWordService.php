@@ -32,9 +32,11 @@ readonly class CreateWordService
      */
     public function execute(string $target): Word
     {
+        $token = $this->generateTokenService->execute(tableName: Word::TABLE_NAME);
+
         $word = new Word();
         $word->target = $target;
-        $word->token = $this->generateTokenService->execute(tableName: Word::TABLE_NAME);
+        $word->token = $token;
         $word->save();
 
         return $word;

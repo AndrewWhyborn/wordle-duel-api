@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
-use App\Service\String\RandomStringGenerator;
-use App\Service\String\RandomStringGeneratorInterface;
+use App\Rules\YandexDictionary\WordExists;
+use App\Service\StringGenerator\RandomStringGenerator;
+use App\Service\StringGenerator\RandomStringGeneratorInterface;
 use App\Service\Token\GenerateTokenService;
+use App\Service\Word\CheckWordExistenceServiceInterface;
+use App\Service\YandexDictionary\CheckWordExistenceService;
 use App\Service\YandexDictionary\Http\LookupHttpService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
@@ -30,14 +33,18 @@ class AppServiceProvider extends ServiceProvider
             ->app
             ->when($yandexDictionaryServices)
             ->needs(ClientInterface::class)
-            ->give(fn() => new Client(['base_uri' => config('yandex-dictionary.baseUrl')]))
+            ->give(fn() => new Client(
+                config: [
+                    'base_uri' => config('yandex-dictionary.baseUrl')
+                ]
+            ))
         ;
 
         $this
             ->app
             ->when($yandexDictionaryServices)
             ->needs(RequestFactoryInterface::class)
-            ->give(fn() => new HttpFactory())
+            ->give(HttpFactory::class)
         ;
 
         $this
@@ -58,7 +65,14 @@ class AppServiceProvider extends ServiceProvider
             ->app
             ->when(GenerateTokenService::class)
             ->needs(RandomStringGeneratorInterface::class)
-            ->give(fn() => new RandomStringGenerator())
+            ->give(RandomStringGenerator::class)
+        ;
+
+        $this
+            ->app
+            ->when(WordExists::class)
+            ->needs(CheckWordExistenceServiceInterface::class)
+            ->give(CheckWordExistenceService::class)
         ;
     }
 

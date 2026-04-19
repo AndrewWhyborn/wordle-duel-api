@@ -4,9 +4,8 @@ declare (strict_types = 1);
 
 namespace App\Service\Token;
 
-use App\Service\String\RandomStringGeneratorInterface;
+use App\Service\StringGenerator\RandomStringGeneratorInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 /**
  * Служба для генерации уникального токена.
@@ -23,8 +22,9 @@ readonly class GenerateTokenService
      *
      * @param RandomStringGeneratorInterface $randomStringGenerator Генератор строк.
      */
-    public function __construct(private RandomStringGeneratorInterface $randomStringGenerator)
-    {
+    public function __construct(
+        private RandomStringGeneratorInterface $randomStringGenerator
+    ) {
     }
 
     /**
@@ -53,16 +53,18 @@ readonly class GenerateTokenService
         }
 
         $table = DB::table($tableName);
-        $try = 0;
+        $attempt = 0;
 
         do {
-            if ($try > self::MAX_ATTEMPTS) {
+            if ($attempt > self::MAX_ATTEMPTS) {
                 throw new \Exception('Превышено максимальное кол-во попыток сгенерировать уникальный токен.');
             }
 
             $token = $this->randomStringGenerator->generate($length);
-            $try++;
-        } while ($table->where($field, $token)->limit(1)->exists());
+            $attempt++;
+
+            $condition = $table->where($field, $token)->limit(1)->exists();
+        } while ($condition);
 
         return $token;
     }

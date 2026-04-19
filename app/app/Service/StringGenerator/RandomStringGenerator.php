@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\String;
+namespace App\Service\StringGenerator;
 
 use Illuminate\Support\Str;
 
