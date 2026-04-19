@@ -12,6 +12,11 @@ use App\Service\Token\GenerateTokenService;
  */
 readonly class CreateWordService
 {
+    /**
+     * Создаст службу.
+     *
+     * @param GenerateTokenService $generateTokenService Служба для генерации уникального токена.
+     */
     public function __construct(private GenerateTokenService $generateTokenService)
     {
     }
