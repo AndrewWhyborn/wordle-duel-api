@@ -24,19 +24,23 @@ readonly class CreateWordService
     /**
      * Создаст загаданное слово.
      *
-     * @param string $target Загаданное слово.
+     * @param string $target     Загаданное слово.
+     * @param bool   $allowRetry Разрешить повторы.
      *
      * @return Word
      *
      * @throws \Exception
      */
-    public function execute(string $target): Word
-    {
+    public function execute(
+        string $target,
+        bool $allowRetry = false,
+    ): Word {
         $token = $this->generateTokenService->execute(tableName: Word::TABLE_NAME);
 
         $word = new Word();
         $word->target = $target;
         $word->token = $token;
+        $word->allow_retry = $allowRetry;
         $word->save();
 
         return $word;

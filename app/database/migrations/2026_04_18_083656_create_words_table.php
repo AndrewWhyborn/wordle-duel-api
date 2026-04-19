@@ -30,6 +30,11 @@ return new class extends Migration
                     ->comment('Загаданное слово.')
                 ;
 
+                $table
+                    ->boolean('allow_retry')
+                    ->comment('Разрешено ли переиграть.')
+                ;
+
                 $table->timestamps();
             }
         );

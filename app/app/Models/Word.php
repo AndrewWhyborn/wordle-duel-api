@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Загаданное слово.
  *
- * @property integer $id         Идентификтор слова.
- * @property string  $token      Токен для короткой ссылки.
- * @property string  $target     Загаданное слово.
- * @property string  $created_at Дата создания.
- * @property string  $updated_at Дата обновления.
+ * @property integer $id          Идентификтор слова.
+ * @property string  $token       Токен для короткой ссылки.
+ * @property string  $target      Загаданное слово.
+ * @property boolean $allow_retry Разрешено ли переиграть.
+ * @property string  $created_at  Дата создания.
+ * @property string  $updated_at  Дата обновления.
  */
 class Word extends Model
 {

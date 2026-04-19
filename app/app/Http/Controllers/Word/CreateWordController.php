@@ -37,7 +37,8 @@ readonly class CreateWordController
 
         try {
             $word = $this->createWordService->execute(
-                target: $request->validated()['target']
+                target: $request->validated()['target'],
+                allowRetry: $request->validated()['allowRetry'] ?? false,
             );
 
             $response->setData(
