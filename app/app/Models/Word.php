@@ -3,16 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Загаданное слово.
  *
- * @property integer $id          Идентификтор слова.
- * @property string  $token       Токен для короткой ссылки.
- * @property string  $target      Загаданное слово.
- * @property boolean $allow_retry Разрешено ли переиграть.
- * @property string  $created_at  Дата создания.
- * @property string  $updated_at  Дата обновления.
+ * @property      int     $id          Идентификтор слова.
+ * @property      string  $token       Токен для короткой ссылки.
+ * @property      string  $target      Загаданное слово.
+ * @property      boolean $allow_retry Разрешено ли переиграть.
+ * @property      string  $created_at  Дата создания.
+ * @property      string  $updated_at  Дата обновления.
+ *
+ * @property-read Game[]  $games       Игры с этим загаданным словом.
  */
 class Word extends Model
 {
@@ -27,4 +30,14 @@ class Word extends Model
     private array $protected = [
         'id'
     ];
+
+    /**
+     * Игры с этим загаданным словом.
+     *
+     * @return HasMany
+     */
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class, 'word_id', 'id');
+    }
 }
