@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Service\String\RandomStringGenerator;
+use App\Service\String\RandomStringGeneratorInterface;
+use App\Service\Token\GenerateTokenService;
 use App\Service\YandexDictionary\Http\LookupHttpService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
@@ -44,7 +47,19 @@ class AppServiceProvider extends ServiceProvider
             ->give(fn(Application $app) => new LogManager($app))
         ;
 
-        $this->app->when($yandexDictionaryServices)->needs('$apiKey')->giveConfig('yandex-dictionary.apiKey');
+        $this
+            ->app
+            ->when($yandexDictionaryServices)
+            ->needs('$apiKey')
+            ->giveConfig('yandex-dictionary.apiKey')
+        ;
+
+        $this
+            ->app
+            ->when(GenerateTokenService::class)
+            ->needs(RandomStringGeneratorInterface::class)
+            ->give(fn() => new RandomStringGenerator())
+        ;
     }
 
     /**

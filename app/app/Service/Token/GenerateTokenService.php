@@ -4,20 +4,35 @@ declare (strict_types = 1);
 
 namespace App\Service\Token;
 
+use App\Service\String\RandomStringGeneratorInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
  * Служба для генерации уникального токена.
  */
-class GenerateTokenService
+readonly class GenerateTokenService
 {
+    /**
+     * Максимальное кол-во попыток на создание уникального токена.
+     */
+    private const int MAX_ATTEMPTS = 10;
+
+    /**
+     * Создаст службу.
+     *
+     * @param RandomStringGeneratorInterface $randomStringGenerator Генератор строк.
+     */
+    public function __construct(private RandomStringGeneratorInterface $randomStringGenerator)
+    {
+    }
+
     /**
      * Сгенерирует уникальный токен для атрибута таблицы.
      *
      * @param string $tableName Название таблицы.
-     * @param int $tokenLength Длина токена.
-     * @param string $field Атрибут таблицы в котором хранится уникальный токен.
+     * @param int    $length    Длина токена.
+     * @param string $field     Атрибут таблицы в котором хранится уникальный токен.
      *
      * @return string
      *
@@ -25,22 +40,28 @@ class GenerateTokenService
      */
     public function execute(
         string $tableName,
-        int $tokenLength = 6,
+        int $length = 6,
         string $field = 'token'
     ): string {
-        if ($tokenLength < 4) {
+        if ($length < 4) {
             throw new \Exception(
                 \sprintf(
                     'Токен длиной в %d символа не сможет обеспечить достаточную уникальность.',
-                    $tokenLength
+                    $length
                 )
             );
         }
 
         $table = DB::table($tableName);
+        $try = 0;
 
         do {
-            $token = Str::random($tokenLength);
+            if ($try > self::MAX_ATTEMPTS) {
+                throw new \Exception('Превышено максимальное кол-во попыток сгенерировать уникальный токен.');
+            }
+
+            $token = $this->randomStringGenerator->generate($length);
+            $try++;
         } while ($table->where($field, $token)->limit(1)->exists());
 
         return $token;
