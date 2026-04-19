@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Word;
 
 use App\Http\Requests\Word\CreateWordRequest;
-use App\Service\CreateWordService;
+use App\Http\Resources\Word\NewWordResponse;
+use App\Service\Word\CreateWordService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -35,12 +36,12 @@ readonly class CreateWordController
         $response = new JsonResponse();
 
         try {
-            $url = $this->createWordService->execute(
+            $word = $this->createWordService->execute(
                 target: $request->validated()['target']
             );
 
             $response->setData(
-                data: ['url' => $url]
+                data: new NewWordResponse($word)
             );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);

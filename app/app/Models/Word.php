@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Загаданное слово.
  *
  * @property integer $id         Идентификтор слова.
- * @property string  $url        URL.
+ * @property string  $token      Токен для короткой ссылки.
  * @property string  $target     Загаданное слово.
  * @property string  $created_at Дата создания.
  * @property string  $updated_at Дата обновления.

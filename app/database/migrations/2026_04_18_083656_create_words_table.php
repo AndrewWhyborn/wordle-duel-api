@@ -19,8 +19,10 @@ return new class extends Migration
                 $table->id();
 
                 $table
-                    ->string('url')
-                    ->comment('URL.')
+                    ->string('token')
+                    ->unique()
+                    ->index()
+                    ->comment('Токен для короткой ссылки.')
                 ;
 
                 $table
