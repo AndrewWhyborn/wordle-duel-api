@@ -47,9 +47,7 @@ readonly class CreateGameService
         );
 
         if ($game !== null) {
-            if ($game->status === GameStatusEnum::IN_PROGRESS->value) {
-                throw new \Exception('Игра уже создана.');
-            } elseif ($game->status === GameStatusEnum::COMPLETED->value) {
+            if ($game->status === GameStatusEnum::COMPLETED->value) {
                 throw new \Exception('Вы уже отгадали это слово.');
             } elseif (
                 $game->status === GameStatusEnum::FAILED->value
@@ -57,6 +55,8 @@ readonly class CreateGameService
             ) {
                 throw new \Exception('Автор игры запретил повторные попытки.');
             }
+
+            throw new \Exception('Игра уже создана.');
         }
 
         $game = $this->gameRepository->createGame(
