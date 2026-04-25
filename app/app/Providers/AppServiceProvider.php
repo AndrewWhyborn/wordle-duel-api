@@ -40,19 +40,15 @@ class AppServiceProvider extends ServiceProvider
             ))
         ;
 
-        $this
-            ->app
-            ->when($yandexDictionaryServices)
-            ->needs(RequestFactoryInterface::class)
-            ->give(HttpFactory::class)
-        ;
+        $this->app->bind(
+            RequestFactoryInterface::class,
+            HttpFactory::class
+        );
 
-        $this
-            ->app
-            ->when($yandexDictionaryServices)
-            ->needs(LoggerInterface::class)
-            ->give(fn(Application $app) => new LogManager($app))
-        ;
+        $this->app->bind(
+            LoggerInterface::class,
+            fn(Application $app) => new LogManager($app)
+        );
 
         $this
             ->app
@@ -61,19 +57,15 @@ class AppServiceProvider extends ServiceProvider
             ->giveConfig('yandex-dictionary.apiKey')
         ;
 
-        $this
-            ->app
-            ->when(GenerateTokenService::class)
-            ->needs(RandomStringGeneratorInterface::class)
-            ->give(RandomStringGenerator::class)
-        ;
+        $this->app->bind(
+            RandomStringGeneratorInterface::class,
+            RandomStringGenerator::class
+        );
 
-        $this
-            ->app
-            ->when(WordExists::class)
-            ->needs(CheckWordExistenceServiceInterface::class)
-            ->give(CheckWordExistenceService::class)
-        ;
+        $this->app->bind(
+            CheckWordExistenceServiceInterface::class,
+            CheckWordExistenceService::class
+        );
     }
 
     /**
