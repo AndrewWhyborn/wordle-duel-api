@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repository\Game\GameRepository;
+use App\Repository\Game\WordRepository;
+use App\Repository\Game\GameRepositoryInterface;
 use App\Rules\YandexDictionary\WordExists;
 use App\Service\StringGenerator\RandomStringGenerator;
 use App\Service\StringGenerator\RandomStringGeneratorInterface;
@@ -65,6 +68,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CheckWordExistenceServiceInterface::class,
             CheckWordExistenceService::class
+        );
+
+        $this->app->bind(
+            GameRepositoryInterface::class,
+            GameRepository::class
         );
     }
 

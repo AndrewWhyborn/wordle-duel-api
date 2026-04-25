@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 readonly class CreateWordController
 {
     /**
-     * Создаст класс.
+     * Создаст контроллер.
      *
-     * @param CreateWordService $createWordService Валидатор запроса на создание слова.
+     * @param CreateWordService $createWordService Служба для создания загаданного слова.
      */
     public function  __construct(private CreateWordService $createWordService)
     {
@@ -27,7 +27,7 @@ readonly class CreateWordController
     /**
      * Создаст загаданное слово и вернет ссылку на игру.
      *
-     * @param CreateWordRequest $request
+     * @param CreateWordRequest $request Запрос на создание слова.
      *
      * @return JsonResponse
      */

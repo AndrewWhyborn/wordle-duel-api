@@ -32,6 +32,16 @@ class Word extends Model
     ];
 
     /**
+     * Ключ для поиска сущности.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'token';
+    }
+
+    /**
      * Игры с этим загаданным словом.
      *
      * @return HasMany

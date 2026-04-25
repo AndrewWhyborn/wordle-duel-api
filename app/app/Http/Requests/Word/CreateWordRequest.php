@@ -8,7 +8,7 @@ use App\Rules\YandexDictionary\WordExists;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Валидатор запроса на создание слова.
+ * Запрос на создание слова.
  */
 class CreateWordRequest extends FormRequest
 {

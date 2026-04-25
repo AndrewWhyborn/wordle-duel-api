@@ -22,9 +22,7 @@ class ExceptionResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'data' => [
-                'error' => $this->getMessage()
-            ]
+            'message' => $this->getMessage()
         ];
     }
 }
