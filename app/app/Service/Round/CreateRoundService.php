@@ -54,7 +54,8 @@ readonly class CreateRoundService
                 \sprintf(
                     'Существительное «%s» не найдено в словаре, попробуйте другое.',
                     $input
-                )
+                ),
+                422
             );
         }
 
