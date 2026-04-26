@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Word;
 
 use App\Http\Requests\Word\CreateWordRequest;
-use App\Http\Resources\ExceptionResponse;
-use App\Http\Resources\NewWordResponse;
+use App\Http\Resources\ExceptionResource;
+use App\Http\Resources\NewWordResource;
 use App\Service\Word\CreateWordService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -44,11 +44,11 @@ readonly class CreateWordController
             );
 
             $response->setData(
-                data: ['data' => new NewWordResponse($word)]
+                data: ['data' => new NewWordResource($word)]
             );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
-            $response->setData(new ExceptionResponse($exception));
+            $response->setData(new ExceptionResource($exception));
         }
 
         return $response;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Round;
 
 use App\Http\Requests\Round\CreateRoundRequest;
-use App\Http\Resources\ExceptionResponse;
-use App\Http\Resources\RoundResponse;
+use App\Http\Resources\ExceptionResource;
+use App\Http\Resources\RoundResource;
 use App\Models\Game;
 use App\Service\Round\CreateRoundService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,11 +44,11 @@ readonly class CreateRoundController
             );
 
             $response->setData(
-                data: ['data' => new RoundResponse($round)]
+                data: ['data' => new RoundResource($round)]
             );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
-            $response->setData(new ExceptionResponse($exception));
+            $response->setData(new ExceptionResource($exception));
         }
 
         return $response;

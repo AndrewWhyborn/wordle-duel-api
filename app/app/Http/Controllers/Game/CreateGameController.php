@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Game;
 
-use App\Http\Resources\ExceptionResponse;
-use App\Http\Resources\GameResponse;
+use App\Http\Resources\ExceptionResource;
+use App\Http\Resources\GameResource;
 use App\Models\Word;
 use App\Service\Game\CreateGameService;
 use Illuminate\Http\Request;
@@ -44,11 +44,11 @@ readonly class CreateGameController
             );
 
             $response->setData(
-                data: ['data' => new GameResponse($game)]
+                data: ['data' => new GameResource($game)]
             );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
-            $response->setData(new ExceptionResponse($exception));
+            $response->setData(new ExceptionResource($exception));
         }
 
         return $response;

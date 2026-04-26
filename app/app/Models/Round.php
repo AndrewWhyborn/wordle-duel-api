@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Раунд игры.
@@ -16,7 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property      string $created_at Дата создания.
  * @property      string $updated_at Дата обновления.
  *
- * @property-read Game   $game      Игра.
+ * @property-read Game     $game    Игра.
+ * @property-read Letter[] $letters Буквы раунда.
  */
 class Round extends Model
 {
@@ -40,5 +42,15 @@ class Round extends Model
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'game_id', 'id',);
+    }
+
+    /**
+     * Буквы раунда.
+     *
+     * @return HasMany
+     */
+    public function letters(): HasMany
+    {
+        return $this->hasMany(Letter::class, 'round_id', 'id')->orderBy('index');
     }
 }

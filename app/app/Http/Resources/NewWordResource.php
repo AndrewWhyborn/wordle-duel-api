@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
+use App\Models\Word;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Ответ с исключением.
+ * Ответ с данными нового загаданного слова.
  *
- * @mixin \Throwable
+ * @mixin Word
  */
-class ExceptionResponse extends JsonResource
+class NewWordResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,7 +23,11 @@ class ExceptionResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'message' => $this->getMessage()
+            'url' => \sprintf(
+                '%s/%s',
+                config('app.url'),
+                $this->token
+            )
         ];
     }
 }

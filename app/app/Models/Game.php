@@ -51,6 +51,6 @@ class Game extends Model
      */
     public function rounds(): HasMany
     {
-        return $this->hasMany(Round::class, 'game_id', 'id');
+        return $this->hasMany(Round::class, 'game_id', 'id')->orderBy('index');
     }
 }
