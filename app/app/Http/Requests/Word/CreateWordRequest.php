@@ -13,29 +13,26 @@ use Illuminate\Foundation\Http\FormRequest;
 class CreateWordRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
+     * Вернет правила валидации.
      *
      * @return array
      */
     public function rules(): array
     {
+        $targetRules = [
+            'required',
+            'string',
+            'min:5',
+            'max:5',
+            'regex:/^[А-Яа-яЁё\s]+$/u',
+        ];
+
+        if ($this->input('dontCheckWord') !== true) {
+            $targetRules[] = app(WordExists::class);
+        }
+
         return [
-            'target' => [
-                'required',
-                'string',
-                'min:5',
-                'max:5',
-                'regex:/^[А-Яа-яЁё\s]+$/u',
-                app(WordExists::class)
-            ],
+            'target' => $targetRules,
             'allowRetry' => [
                 'boolean'
             ]
@@ -43,7 +40,7 @@ class CreateWordRequest extends FormRequest
     }
 
     /**
-     * Сообщения об ошибках валидации.
+     * Вернет сообщения об ошибках валидации.
      *
      * @return array|string[]
      */

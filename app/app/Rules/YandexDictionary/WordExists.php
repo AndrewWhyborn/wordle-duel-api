@@ -42,7 +42,7 @@ readonly class WordExists implements ValidationRule
         if (!$result) {
             $fail(
                 \sprintf(
-                'Слово «%s» не найдено в словаре, попробуйте другое.',
+                'Существительное «%s» не найдено в словаре, попробуйте другое.',
                     $value
                 )
             );

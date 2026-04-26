@@ -11,13 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Игра.
  *
- * @property      int     $id         Идентификтор игры.
+ * @property      int     $id         Идентификтор игры
  * @property      int     $word_id    Идентификатор загаданного слова.
  * @property      string  $ip         IP игрока.
  * @property      string  $status     Статус игры.
  * @property      string  $created_at Дата создания.
  * @property      string  $updated_at Дата обновления.
- *
  * @property-read Word    $word       Загаданное слово.
  * @property-read Round[] $rounds     Раунды игры.
  */

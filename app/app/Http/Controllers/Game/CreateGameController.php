@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Game\StartGameRequest;
 use App\Http\Resources\Exception\ExceptionResponse;
 use App\Http\Resources\Game\GameResponse;
 use App\Models\Word;

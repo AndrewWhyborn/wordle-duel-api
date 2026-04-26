@@ -14,6 +14,11 @@ use Psr\Http\Client\ClientExceptionInterface;
 readonly class CheckWordExistenceService implements CheckWordExistenceServiceInterface
 {
     /**
+     * Существительное.
+     */
+    private const string NOUN = 'noun';
+
+    /**
      * Создаст службу.
      *
      * @param LookupHttpService $lookupHttpService Служба для поиска слова в Яндекс Словаре.
@@ -34,6 +39,14 @@ readonly class CheckWordExistenceService implements CheckWordExistenceServiceInt
     public function check(string $word): bool
     {
         $result = $this->lookupHttpService->execute(text: $word);
-        return $result !== null && \count($result) > 0;
+
+        if (
+            isset($result[0]['pos'])
+            && $result[0]['pos'] === self::NOUN
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }
