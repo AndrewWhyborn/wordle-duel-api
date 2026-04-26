@@ -24,6 +24,12 @@ return new class extends Migration
                 ;
 
                 $table
+                    ->integer('index')
+                    ->unsigned()
+                    ->comment('Буква.');
+                ;
+
+                $table
                     ->string('value')
                     ->comment('Буква.');
                 ;

@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Загаданное слово.
  *
- * @property      int     $id          Идентификтор слова.
- * @property      string  $token       Токен для короткой ссылки.
- * @property      string  $target      Загаданное слово.
- * @property      boolean $allow_retry Разрешено ли переиграть.
- * @property      string  $created_at  Дата создания.
- * @property      string  $updated_at  Дата обновления.
+ * @property      int     $id              Идентификтор слова.
+ * @property      string  $token           Токен для короткой ссылки.
+ * @property      string  $target          Загаданное слово.
+ * @property      boolean $allow_retry     Разрешено ли переиграть.
+ * @property      boolean $dont_check_word Не проверять слово в словаре.
+ * @property      string  $created_at      Дата создания.
+ * @property      string  $updated_at      Дата обновления.
  *
  * @property-read Game[]  $games       Игры с этим загаданным словом.
  */

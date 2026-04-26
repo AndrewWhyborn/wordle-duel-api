@@ -35,6 +35,9 @@ class CreateWordRequest extends FormRequest
             'target' => $targetRules,
             'allowRetry' => [
                 'boolean'
+            ],
+            'dontCheckWord' => [
+                'boolean'
             ]
         ];
     }
@@ -51,7 +54,8 @@ class CreateWordRequest extends FormRequest
             'target.min' => 'Слово должно быть длиной в 5 букв.',
             'target.max' => 'Слово должно быть длиной в 5 букв.',
             'target.regex' => 'Разрешено вводить только русские буквы.',
-            'allowRetry.boolean' => 'Параметр «разрешить повторы» должен иметь логический тип.'
+            'allowRetry.boolean' => 'Параметр «разрешить повторы» должен иметь логический тип.',
+            'dontCheckWord.boolean' => 'Параметр «не проверять слово в словаре» должен иметь логический тип.',
         ];
     }
 }

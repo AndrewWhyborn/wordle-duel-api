@@ -35,6 +35,11 @@ return new class extends Migration
                     ->comment('Разрешено ли переиграть.')
                 ;
 
+                $table
+                    ->boolean('dont_check_word')
+                    ->comment('Не проверять слово в словаре.')
+                ;
+
                 $table->timestamps();
             }
         );

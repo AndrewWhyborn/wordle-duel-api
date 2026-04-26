@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources\Game;
+namespace App\Http\Resources;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
@@ -23,8 +23,9 @@ class GameResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'data' => [
-                'id' => $this->id,
+            'type' => Game::TABLE_NAME,
+            'id' => $this->id,
+            'attributes' => [
                 'status' => $this->status,
                 'createdAt' => $this->created_at,
                 'updatedAt' => $this->updated_at,

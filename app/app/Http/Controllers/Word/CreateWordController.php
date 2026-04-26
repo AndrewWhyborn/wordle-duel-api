@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Word;
 
 use App\Http\Requests\Word\CreateWordRequest;
-use App\Http\Resources\Exception\ExceptionResponse;
-use App\Http\Resources\Word\NewWordResponse;
+use App\Http\Resources\ExceptionResponse;
+use App\Http\Resources\NewWordResponse;
 use App\Service\Word\CreateWordService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -40,9 +40,12 @@ readonly class CreateWordController
             $word = $this->createWordService->execute(
                 target: $request->validated()['target'],
                 allowRetry: $request->validated()['allowRetry'] ?? false,
+                dontCheckWord: $request->validated()['dontCheckWord'] ?? false,
             );
 
-            $response->setData(new NewWordResponse($word));
+            $response->setData(
+                data: ['data' => new NewWordResponse($word)]
+            );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
             $response->setData(new ExceptionResponse($exception));

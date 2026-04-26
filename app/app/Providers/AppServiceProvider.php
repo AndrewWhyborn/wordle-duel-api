@@ -10,6 +10,8 @@ use App\Service\StringGenerator\RandomStringGenerator;
 use App\Service\StringGenerator\RandomStringGeneratorInterface;
 use App\Service\Token\GenerateTokenService;
 use App\Service\Word\CheckWordExistenceServiceInterface;
+use App\Service\Word\CompareLettersService;
+use App\Service\Word\CompareLettersServiceInterface;
 use App\Service\YandexDictionary\CheckWordExistenceService;
 use App\Service\YandexDictionary\Http\LookupHttpService;
 use GuzzleHttp\Client;
@@ -73,6 +75,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             GameRepositoryInterface::class,
             GameRepository::class
+        );
+
+        $this->app->bind(
+            CompareLettersServiceInterface::class,
+            CompareLettersService::class
         );
     }
 

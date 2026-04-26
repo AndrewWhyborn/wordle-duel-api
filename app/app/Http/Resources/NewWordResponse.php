@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources\Word;
+namespace App\Http\Resources;
 
 use App\Models\Word;
 use Illuminate\Http\Request;
@@ -23,7 +23,8 @@ class NewWordResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'data' => [
+            'type' => Word::TABLE_NAME,
+            'attributes' => [
                 'url' => \sprintf(
                     '%s/%s',
                     config('app.url'),
