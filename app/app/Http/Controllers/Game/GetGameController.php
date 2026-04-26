@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Game;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Exception\ExceptionResponse;
 use App\Http\Resources\Game\GameResponse;
 use App\Models\Word;
-use App\Repository\Game\GameRepositoryInterface;
 use App\Service\Game\GetGameService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,14 +14,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Контроллер для получения игры.
  */
-class GetGameController extends Controller
+readonly class GetGameController
 {
     /**
      * Создаст контроллер.
      *
      * @param GetGameService $getGameService Служба для получения игры.
      */
-    public function __construct(private readonly GetGameService $getGameService)
+    public function __construct(private GetGameService $getGameService)
     {
     }
 
