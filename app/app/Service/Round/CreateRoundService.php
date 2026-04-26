@@ -59,7 +59,8 @@ readonly class CreateRoundService
         }
 
         $roundsCount
-            = Round::query()->where(
+            = Round::query()
+            ->where(
                 column: 'game_id',
                 operator: '=',
                 value: $game->id
