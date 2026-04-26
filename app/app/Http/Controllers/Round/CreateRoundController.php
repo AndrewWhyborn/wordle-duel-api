@@ -43,9 +43,7 @@ readonly class CreateRoundController
                 letters: $request->validated()['letters'],
             );
 
-            $response->setData(
-                data: ['data' => new RoundResource($round)]
-            );
+            $response->setData(new RoundResource($round));
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
             $response->setData(new ExceptionResource($exception));

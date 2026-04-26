@@ -43,9 +43,7 @@ readonly class CreateWordController
                 dontCheckWord: $request->validated()['dontCheckWord'] ?? false,
             );
 
-            $response->setData(
-                data: ['data' => new NewWordResource($word)]
-            );
+            $response->setData(new NewWordResource($word));
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
             $response->setData(new ExceptionResource($exception));

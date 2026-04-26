@@ -43,9 +43,7 @@ readonly class GetGameController
                 ip: $request->ip(),
             );
 
-            $response->setData(
-                data: new GameResource($game)
-            );
+            $response->setData(new GameResource($game));
         } catch (\Throwable $exception) {
             $statusCode = $exception->getCode();
 
