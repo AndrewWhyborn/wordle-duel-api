@@ -9,8 +9,8 @@ use App\Enum\LetterStatusEnum;
 use App\Models\Game;
 use App\Models\Letter;
 use App\Models\Round;
+use App\Service\Word\CheckWordExistenceServiceInterface;
 use App\Service\Word\CompareLettersServiceInterface;
-use App\Type\ComparedLetterType;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -21,10 +21,13 @@ readonly class CreateRoundService
     /**
      * Создаст службу.
      *
-     * @param CompareLettersServiceInterface $compareLettersService Служба для сравнения букв двух слов.
+     * @param CompareLettersServiceInterface     $compareLettersService     Служба для сравнения букв двух слов.
+     * @param CheckWordExistenceServiceInterface $checkWordExistenceService Служба проверки существования слова.
      */
-    public function __construct(private CompareLettersServiceInterface $compareLettersService)
-    {
+    public function __construct(
+        private CompareLettersServiceInterface $compareLettersService,
+        private CheckWordExistenceServiceInterface $checkWordExistenceService
+    ) {
     }
 
     /**
@@ -41,6 +44,18 @@ readonly class CreateRoundService
     {
         if ($game->status !== GameStatusEnum::IN_PROGRESS->value) {
             throw new \Exception('Вы закончили данную игру.');
+        }
+
+        if (
+            $game->word->dont_check_word === false
+            && $this->checkWordExistenceService->check($input = \implode('', $letters)) === false
+        ) {
+            throw new \Exception(
+                \sprintf(
+                    'Существительное «%s» не найдено в словаре, попробуйте другое.',
+                    $input
+                )
+            );
         }
 
         $roundsCount
@@ -70,7 +85,7 @@ readonly class CreateRoundService
             $letter = new Letter();
             $letter->round_id = $round->id;
             $letter->index = $comparison->index;
-            $letter->value = $comparison->value;
+            $letter->value = \mb_strtoupper($comparison->value);
             $letter->status = $comparison->status;
             $letter->save();
 
@@ -82,7 +97,7 @@ readonly class CreateRoundService
         if ($successCount === 5) {
             $game->status = GameStatusEnum::COMPLETED->value;
             $game->save();
-        } elseif ($roundsCount === 5) {
+        } elseif ($roundsCount === 6) {
             $game->status = GameStatusEnum::FAILED->value;
             $game->save();
         }

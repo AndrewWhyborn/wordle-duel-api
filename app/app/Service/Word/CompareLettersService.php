@@ -28,7 +28,7 @@ class CompareLettersService implements CompareLettersServiceInterface
             $status = LetterStatusEnum::FAR;
 
             foreach ($targetLetters as $targetIndex => $targetLetter) {
-                if ($inputLetter === $targetLetter) {
+                if (\mb_strtoupper($inputLetter) === $targetLetter) {
                     if ($inputIndex === $targetIndex) {
                         $status = LetterStatusEnum::SUCCESS;
                     } elseif ($status === LetterStatusEnum::FAR) {

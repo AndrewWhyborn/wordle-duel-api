@@ -40,7 +40,7 @@ readonly class CreateWordService
         $token = $this->generateTokenService->execute(tableName: Word::TABLE_NAME);
 
         $word = new Word();
-        $word->target = $target;
+        $word->target = \mb_strtoupper($target);
         $word->token = $token;
         $word->allow_retry = $allowRetry;
         $word->dont_check_word = $dontCheckWord;
