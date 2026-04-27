@@ -43,7 +43,11 @@ readonly class CreateGameController
                 ip: $request->ip(),
             );
 
-            $response->setData(new GameResource($game));
+            $response->setData(
+                data: [
+                    'game' => new GameResource($game)
+                ]
+            );
         } catch (\Throwable $exception) {
             $response->setStatusCode(400);
             $response->setData(new ExceptionResource($exception));
