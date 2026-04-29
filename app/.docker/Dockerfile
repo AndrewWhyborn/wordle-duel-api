@@ -11,6 +11,9 @@ RUN apt-get update \
 
 RUN docker-php-ext-install pdo_pgsql pgsql
 
+RUN pecl install xdebug
+COPY ./app/.docker/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
+
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 COPY ./app /var/www/html

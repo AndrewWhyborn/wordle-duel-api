@@ -16,6 +16,8 @@ services:
         GID: '${GID:-1000}'
     container_name: ${PROJECT_NAME}_app
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     tty: true
     volumes:
       - ./app:/var/www/html:rw
