@@ -34,8 +34,6 @@ class JsonEncoder
     public static function encode(mixed $value): string
     {
         if ($value === []) {
-            // Пустые массивы всегда преобразуем в пустые объекты, потому что JSON "[]" может
-            // вызвать проблемы при чтении в некоторых приложениях.
             return '{}';
         }
 
