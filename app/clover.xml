@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1777812208">
-  <project timestamp="1777812208" name="Clover Coverage">
+<coverage generated="1777812624">
+  <project timestamp="1777812624" name="Clover Coverage">
     <package name="App\Enums">
       <file name="/var/www/html/app/Enums/GameStatusEnum.php">
         <class name="App\Enums\GameStatusEnum" namespace="App\Enums">
