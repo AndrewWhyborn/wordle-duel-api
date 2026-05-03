@@ -3,17 +3,16 @@
 namespace App\Providers;
 
 use App\Repository\Game\GameRepository;
-use App\Repository\Game\WordRepository;
 use App\Repository\Game\GameRepositoryInterface;
-use App\Rules\YandexDictionary\WordExists;
-use App\Service\StringGenerator\RandomStringGenerator;
-use App\Service\StringGenerator\RandomStringGeneratorInterface;
-use App\Service\Token\GenerateTokenService;
-use App\Service\Word\CheckWordExistenceServiceInterface;
-use App\Service\Word\CompareLettersService;
-use App\Service\Word\CompareLettersServiceInterface;
-use App\Service\YandexDictionary\CheckWordExistenceService;
-use App\Service\YandexDictionary\Http\LookupHttpService;
+use App\Services\StringGenerator\RandomStringGenerator;
+use App\Services\StringGenerator\RandomStringGeneratorInterface;
+use App\Services\Token\CheckAvailableTokenService;
+use App\Services\Token\CheckAvailableTokenServiceInterface;
+use App\Services\Word\CheckWordExistenceServiceInterface;
+use App\Services\Word\CompareLettersService;
+use App\Services\Word\CompareLettersServiceInterface;
+use App\Services\YandexDictionary\CheckWordExistenceService;
+use App\Services\YandexDictionary\Http\LookupHttpService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
 use Illuminate\Foundation\Application;
@@ -80,6 +79,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CompareLettersServiceInterface::class,
             CompareLettersService::class
+        );
+
+        $this->app->bind(
+            CheckAvailableTokenServiceInterface::class,
+            CheckAvailableTokenService::class
         );
     }
 

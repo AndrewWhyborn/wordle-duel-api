@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Word;
+namespace App\Services\Word;
 
 use App\Models\Word;
-use App\Service\Token\GenerateTokenService;
+use App\Services\Token\GenerateTokenService;
 
 /**
  * Служба для создания загаданного слова.

@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Game;
 use App\Http\Resources\ExceptionResource;
 use App\Http\Resources\GameResource;
 use App\Models\Word;
-use App\Service\Game\CreateGameService;
+use App\Services\Game\CreateGameService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

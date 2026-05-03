@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Round;
+namespace App\Services\Round;
 
-use App\Enum\GameStatusEnum;
-use App\Enum\LetterStatusEnum;
+use App\Enums\GameStatusEnum;
+use App\Enums\LetterStatusEnum;
 use App\Models\Game;
 use App\Models\Letter;
 use App\Models\Round;
-use App\Service\Word\CheckWordExistenceServiceInterface;
-use App\Service\Word\CompareLettersServiceInterface;
+use App\Services\Word\CheckWordExistenceServiceInterface;
+use App\Services\Word\CompareLettersServiceInterface;
 use Illuminate\Support\Facades\DB;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\JsonEncoding;
+namespace App\Services\JsonEncoding;
 
 /**
  * Преобразователь значений в формат JSON.
@@ -33,6 +33,10 @@ class JsonEncoder
      */
     public static function encode(mixed $value): string
     {
+        if (!is_array($value) && !is_object($value)) {
+            throw new \JsonException('Несовместимый с форматом JSON тип.');
+        }
+
         if ($value === []) {
             return '{}';
         }

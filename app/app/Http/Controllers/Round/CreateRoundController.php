@@ -8,7 +8,7 @@ use App\Http\Requests\Round\CreateRoundRequest;
 use App\Http\Resources\ExceptionResource;
 use App\Http\Resources\RoundResource;
 use App\Models\Game;
-use App\Service\Round\CreateRoundService;
+use App\Services\Round\CreateRoundService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**

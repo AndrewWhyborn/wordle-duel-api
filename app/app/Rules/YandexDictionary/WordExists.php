@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Rules\YandexDictionary;
 
-use App\Service\Word\CheckWordExistenceServiceInterface;
+use App\Services\Word\CheckWordExistenceServiceInterface;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Psr\Http\Client\ClientExceptionInterface;

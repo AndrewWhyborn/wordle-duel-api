@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Service\YandexDictionary\Http;
+namespace App\Services\YandexDictionary\Http;
 
-use App\Service\JsonEncoding\JsonDecoder;
+use App\Services\JsonEncoding\JsonDecoder;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Client\RequestExceptionInterface;

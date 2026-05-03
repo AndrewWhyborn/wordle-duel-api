@@ -2,10 +2,9 @@
 
 declare (strict_types = 1);
 
-namespace App\Service\Token;
+namespace App\Services\Token;
 
-use App\Service\StringGenerator\RandomStringGeneratorInterface;
-use Illuminate\Support\Facades\DB;
+use App\Services\StringGenerator\RandomStringGeneratorInterface;
 
 /**
  * Служба для генерации уникального токена.
@@ -20,10 +19,12 @@ readonly class GenerateTokenService
     /**
      * Создаст службу.
      *
-     * @param RandomStringGeneratorInterface $randomStringGenerator Генератор строк.
+     * @param RandomStringGeneratorInterface      $randomStringGenerator      Генератор строк.
+     * @param CheckAvailableTokenServiceInterface $checkAvailableTokenService Служба для проверки наличия токена в таблице..
      */
     public function __construct(
-        private RandomStringGeneratorInterface $randomStringGenerator
+        private RandomStringGeneratorInterface $randomStringGenerator,
+        private CheckAvailableTokenServiceInterface $checkAvailableTokenService,
     ) {
     }
 
@@ -52,7 +53,6 @@ readonly class GenerateTokenService
             );
         }
 
-        $table = DB::table($tableName);
         $attempt = 0;
 
         do {
@@ -63,8 +63,8 @@ readonly class GenerateTokenService
             $token = $this->randomStringGenerator->generate($length);
             $attempt++;
 
-            $condition = $table->where($field, $token)->limit(1)->exists();
-        } while ($condition);
+            $tokenExist = $this->checkAvailableTokenService->execute($tableName, $token, $field);
+        } while ($tokenExist);
 
         return $token;
     }

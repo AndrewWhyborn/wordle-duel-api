@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service\YandexDictionary;
+namespace App\Services\YandexDictionary;
 
-use App\Service\Word\CheckWordExistenceServiceInterface;
-use App\Service\YandexDictionary\Http\LookupHttpService;
+use App\Services\Word\CheckWordExistenceServiceInterface;
+use App\Services\YandexDictionary\Http\LookupHttpService;
 use Psr\Http\Client\ClientExceptionInterface;
 
 /**

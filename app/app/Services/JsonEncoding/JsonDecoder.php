@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\JsonEncoding;
+namespace App\Services\JsonEncoding;
 
 /**
  * Преобразователь строк формата JSON.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\StringGenerator;
+namespace App\Services\StringGenerator;
 
 use Illuminate\Support\Str;
 
@@ -20,6 +20,10 @@ class RandomStringGenerator implements RandomStringGeneratorInterface
      */
     public function generate(int $length): string
     {
+        if ($length <= 0) {
+            throw new \InvalidArgumentException('Длина генерируемой строки не может равняться 0.');
+        }
+
         return Str::random($length);
     }
 }

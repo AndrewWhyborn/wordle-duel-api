@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\YandexDictionary\Http;
+namespace App\Services\YandexDictionary\Http;
 
 use Psr\Http\Client\ClientExceptionInterface;
 

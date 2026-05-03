@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Game;
 
-use App\Enum\GameStatusEnum;
+use App\Enums\GameStatusEnum;
 use App\Models\Game;
 use App\Models\Word;
 

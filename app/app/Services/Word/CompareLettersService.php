@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Word;
+namespace App\Services\Word;
 
-use App\Enum\LetterStatusEnum;
+use App\Enums\LetterStatusEnum;
 use App\Type\ComparedLetterType;
 
 /**

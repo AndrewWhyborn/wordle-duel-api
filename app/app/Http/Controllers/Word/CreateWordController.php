@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Word;
 use App\Http\Requests\Word\CreateWordRequest;
 use App\Http\Resources\ExceptionResource;
 use App\Http\Resources\NewWordResource;
-use App\Service\Word\CreateWordService;
+use App\Services\Word\CreateWordService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**

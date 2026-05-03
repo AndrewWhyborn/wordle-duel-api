@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Game;
+namespace App\Services\Game;
 
-use App\Enum\GameStatusEnum;
+use App\Enums\GameStatusEnum;
 use App\Models\Game;
 use App\Models\Word;
 use App\Repository\Game\GameRepositoryInterface;
